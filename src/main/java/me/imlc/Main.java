@@ -12,6 +12,8 @@ import java.nio.charset.StandardCharsets;
 public class Main {
     public static void main(String[] args) throws Exception {
         QueuedThreadPool threadPool = new QueuedThreadPool();
+
+//        Or you would like to customize the thread factory or executor
 //        ThreadFactory factory = Thread.ofVirtual().name("jetty-vt-", 0).factory();
 //        ExecutorService executor = Executors.newThreadPerTaskExecutor(factory);
 //        threadPool.setVirtualThreadsExecutor(executor);
@@ -35,7 +37,10 @@ public class Main {
                 case "/api/v1/users": {
                     switch (request.getMethod()) {
                         case "GET": {
+
+                            // simulate sync IO operation like writing to database
                             Thread.sleep(10000);
+
                             response.getHeaders().add("Content-Type", "application/json");
                             // language=JSON
                             response.write(true, ByteBuffer.wrap("""
