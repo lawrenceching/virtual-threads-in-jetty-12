@@ -7,9 +7,13 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Logger;
 
 
 public class Main {
+
+    private static final Logger logger = Logger.getLogger("main");
+
     public static void main(String[] args) throws Exception {
         QueuedThreadPool threadPool = new QueuedThreadPool();
 
@@ -17,13 +21,15 @@ public class Main {
 //        ThreadFactory factory = Thread.ofVirtual().name("jetty-vt-", 0).factory();
 //        ExecutorService executor = Executors.newThreadPerTaskExecutor(factory);
 //        threadPool.setVirtualThreadsExecutor(executor);
+        final int port = 8080;
         threadPool.setVirtualThreadsExecutor(VirtualThreads.getDefaultVirtualThreadsExecutor());
         Server server = new Server(threadPool);
         ServerConnector connector = new ServerConnector(server);
-        connector.setPort(8080);
+        connector.setPort(port);
         server.addConnector(connector);
         server.setHandler(new HelloHandler());
         server.start();
+        logger.info("Server started at http://localhost:%s/".formatted(port));
     }
 
     public static class HelloHandler extends Handler.Abstract {

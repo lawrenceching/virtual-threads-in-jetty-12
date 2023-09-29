@@ -13,7 +13,6 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>12.0.1</jetty.version>
-        <jakarta.servlet.api.version>4.0.4</jakarta.servlet.api.version>
     </properties>
 
     <dependencies>
@@ -22,13 +21,6 @@
             <artifactId>jetty-server</artifactId>
             <version>${jetty.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>11.0.16</version>
-        </dependency>
-
     </dependencies>
 
 </project>
